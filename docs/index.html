@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Icecrown AH — Epic Gem Tracker</title>
+<style>
+  :root {
+    --bg: #1a1a2e; --surface: #16213e; --surface2: #0f3460;
+    --accent: #e94560; --text: #eaeaea; --muted: #888;
+    --positive: #4caf50; --negative: #f44336; --neutral: #aaa;
+    --gold: #ffd700; --border: #2a2a4a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; font-size: 14px; }
+  header { background: var(--surface2); padding: 16px 24px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 16px; }
+  header h1 { font-size: 1.4em; color: var(--gold); }
+  header .updated { color: var(--muted); font-size: 0.85em; margin-left: auto; }
+  .container { max-width: 1600px; margin: 0 auto; padding: 16px; }
+
+  /* Executive Summary */
+  .exec-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .exec-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .exec-card h2 { color: var(--gold); font-size: 1.1em; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  .exec-card h3 { color: var(--accent); font-size: 0.9em; margin: 10px 0 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .exec-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px solid #222; font-size: 0.88em; }
+  .exec-row:last-child { border-bottom: none; }
+  .exec-gem { color: var(--text); }
+  .exec-val { font-weight: 600; }
+
+  /* Gem sections */
+  .gem-section { margin-bottom: 28px; }
+  .gem-header { background: var(--surface2); border-radius: 8px 8px 0 0; padding: 10px 16px; display: flex; align-items: center; gap: 12px; border-bottom: 2px solid var(--accent); }
+  .gem-header h2 { font-size: 1.05em; color: var(--gold); }
+  .gem-body { background: var(--surface); border: 1px solid var(--border); border-top: none; border-radius: 0 0 8px 8px; padding: 16px; }
+
+  /* Side-by-side faction panels */
+  .faction-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .faction-panel h3 { color: var(--muted); font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+
+  /* Transmute info */
+  .transmute-info { background: #0d1b2a; border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; margin-bottom: 10px; font-size: 0.86em; }
+  .transmute-info .row { display: flex; justify-content: space-between; padding: 2px 0; }
+  .transmute-info .label { color: var(--muted); }
+  .transmute-info .value { color: var(--text); font-weight: 500; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 0.84em; }
+  th { background: #0d1b2a; color: var(--muted); text-transform: uppercase; font-size: 0.78em; letter-spacing: 0.05em; padding: 6px 8px; text-align: left; position: sticky; top: 0; }
+  td { padding: 5px 8px; border-bottom: 1px solid #1e1e3a; }
+  tr:hover td { background: #1e2a3a; }
+  tr.best-cut td { background: rgba(78, 200, 80, 0.07); }
+
+  .positive { color: var(--positive); }
+  .negative { color: var(--negative); }
+  .neutral  { color: var(--neutral); }
+  .gold-val { color: var(--gold); }
+  .badge-best { background: var(--positive); color: #000; font-size: 0.7em; padding: 1px 5px; border-radius: 3px; margin-left: 4px; font-weight: 700; }
+
+  @media (max-width: 900px) {
+    .exec-summary, .faction-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>⚔️ Icecrown — Epic Gem JC Tracker</h1>
+  <span class="updated">Last updated: 2026-06-11 16:14 UTC</span>
+</header>
+<div class="container">
+<div class="exec-summary">
+<div class="exec-card">
+<h2>🔴 Horde — Executive Summary</h2>
+<h3>✅ Transmutes Worth Doing</h3>
+<div class="exec-row"><span class="neutral">None currently profitable</span></div>
+<h3>❌ Transmutes Not Worth Doing</h3>
+<div class="exec-row"><span class="neutral">All transmutes profitable</span></div>
+<h3>💎 Best Cut Per Color</h3>
+</div>
+<div class="exec-card">
+<h2>🔵 Alliance — Executive Summary</h2>
+<h3>✅ Transmutes Worth Doing</h3>
+<div class="exec-row"><span class="neutral">None currently profitable</span></div>
+<h3>❌ Transmutes Not Worth Doing</h3>
+<div class="exec-row"><span class="neutral">All transmutes profitable</span></div>
+<h3>💎 Best Cut Per Color</h3>
+</div>
+</div>
+<div class="gem-section">
+<div class="gem-header"><h2>🔴 RED &nbsp; Cardinal Ruby</h2></div>
+<div class="gem-body">
+<div class="faction-grid">
+<div class="faction-panel"><h3>🔴 Horde</h3>
+<div class="transmute-info">
+  <div class="row"><span class="label">Raw Cardinal Ruby</span><span class="value gold-val">No data</span></div>
+  <div class="row"><span class="label">Transmute Cost</span><span class="value">No data</span></div>
+  <div class="row"><span class="label">Transmute Margin</span><span class="value neutral">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Scarlet Ruby</span><span class="value">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Eternal Fire</span><span class="value">N/A</span></div>
+</div>
+<table>
+<thead><tr>
+  <th>Cut</th><th>Price</th><th>vs Raw</th><th>vs Transmute</th><th>Qty AH</th>
+</tr></thead><tbody>
+<tr>
+  <td>Bold Cardinal Ruby</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Delicate Cardinal Ruby</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Runed Cardinal Ruby</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Bright Cardinal Ruby</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Subtle Cardinal Ruby</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Flashing Cardinal Ruby</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Fractured Cardinal Ruby</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Precise Cardinal Ruby</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+</tbody></table>
+</div>
+<div class="faction-panel"><h3>🔵 Alliance</h3>
+<div class="transmute-info">
+  <div class="row"><span class="label">Raw Cardinal Ruby</span><span class="value gold-val">No data</span></div>
+  <div class="row"><span class="label">Transmute Cost</span><span class="value">No data</span></div>
+  <div class="row"><span class="label">Transmute Margin</span><span class="value neutral">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Scarlet Ruby</span><span class="value">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Eternal Fire</span><span class="value">N/A</span></div>
+</div>
+<table>
+<thead><tr>
+  <th>Cut</th><th>Price</th><th>vs Raw</th><th>vs Transmute</th><th>Qty AH</th>
+</tr></thead><tbody>
+<tr>
+  <td>Bold Cardinal Ruby</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Delicate Cardinal Ruby</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Runed Cardinal Ruby</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Bright Cardinal Ruby</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Subtle Cardinal Ruby</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Flashing Cardinal Ruby</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Fractured Cardinal Ruby</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Precise Cardinal Ruby</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+<div class="gem-section">
+<div class="gem-header"><h2>🟡 YELLOW &nbsp; King's Amber</h2></div>
+<div class="gem-body">
+<div class="faction-grid">
+<div class="faction-panel"><h3>🔴 Horde</h3>
+<div class="transmute-info">
+  <div class="row"><span class="label">Raw King's Amber</span><span class="value gold-val">No data</span></div>
+  <div class="row"><span class="label">Transmute Cost</span><span class="value">No data</span></div>
+  <div class="row"><span class="label">Transmute Margin</span><span class="value neutral">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Autumn's Glow</span><span class="value">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Eternal Life</span><span class="value">N/A</span></div>
+</div>
+<table>
+<thead><tr>
+  <th>Cut</th><th>Price</th><th>vs Raw</th><th>vs Transmute</th><th>Qty AH</th>
+</tr></thead><tbody>
+<tr>
+  <td>Brilliant King's Amber</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Smooth King's Amber</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Rigid King's Amber</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Thick King's Amber</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Mystic King's Amber</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Quick King's Amber</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+</tbody></table>
+</div>
+<div class="faction-panel"><h3>🔵 Alliance</h3>
+<div class="transmute-info">
+  <div class="row"><span class="label">Raw King's Amber</span><span class="value gold-val">No data</span></div>
+  <div class="row"><span class="label">Transmute Cost</span><span class="value">No data</span></div>
+  <div class="row"><span class="label">Transmute Margin</span><span class="value neutral">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Autumn's Glow</span><span class="value">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Eternal Life</span><span class="value">N/A</span></div>
+</div>
+<table>
+<thead><tr>
+  <th>Cut</th><th>Price</th><th>vs Raw</th><th>vs Transmute</th><th>Qty AH</th>
+</tr></thead><tbody>
+<tr>
+  <td>Brilliant King's Amber</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Smooth King's Amber</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Rigid King's Amber</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Thick King's Amber</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Mystic King's Amber</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Quick King's Amber</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+<div class="gem-section">
+<div class="gem-header"><h2>🔵 BLUE &nbsp; Majestic Zircon</h2></div>
+<div class="gem-body">
+<div class="faction-grid">
+<div class="faction-panel"><h3>🔴 Horde</h3>
+<div class="transmute-info">
+  <div class="row"><span class="label">Raw Majestic Zircon</span><span class="value gold-val">No data</span></div>
+  <div class="row"><span class="label">Transmute Cost</span><span class="value">No data</span></div>
+  <div class="row"><span class="label">Transmute Margin</span><span class="value neutral">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Sky Sapphire</span><span class="value">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Eternal Air</span><span class="value">N/A</span></div>
+</div>
+<table>
+<thead><tr>
+  <th>Cut</th><th>Price</th><th>vs Raw</th><th>vs Transmute</th><th>Qty AH</th>
+</tr></thead><tbody>
+<tr>
+  <td>Solid Majestic Zircon</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Sparkling Majestic Zircon</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Lustrous Majestic Zircon</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Stormy Majestic Zircon</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+</tbody></table>
+</div>
+<div class="faction-panel"><h3>🔵 Alliance</h3>
+<div class="transmute-info">
+  <div class="row"><span class="label">Raw Majestic Zircon</span><span class="value gold-val">No data</span></div>
+  <div class="row"><span class="label">Transmute Cost</span><span class="value">No data</span></div>
+  <div class="row"><span class="label">Transmute Margin</span><span class="value neutral">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Sky Sapphire</span><span class="value">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Eternal Air</span><span class="value">N/A</span></div>
+</div>
+<table>
+<thead><tr>
+  <th>Cut</th><th>Price</th><th>vs Raw</th><th>vs Transmute</th><th>Qty AH</th>
+</tr></thead><tbody>
+<tr>
+  <td>Solid Majestic Zircon</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Sparkling Majestic Zircon</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Lustrous Majestic Zircon</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Stormy Majestic Zircon</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+<div class="gem-section">
+<div class="gem-header"><h2>🟣 PURPLE &nbsp; Dreadstone</h2></div>
+<div class="gem-body">
+<div class="faction-grid">
+<div class="faction-panel"><h3>🔴 Horde</h3>
+<div class="transmute-info">
+  <div class="row"><span class="label">Raw Dreadstone</span><span class="value gold-val">No data</span></div>
+  <div class="row"><span class="label">Transmute Cost</span><span class="value">No data</span></div>
+  <div class="row"><span class="label">Transmute Margin</span><span class="value neutral">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Twilight Opal</span><span class="value">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Eternal Shadow</span><span class="value">N/A</span></div>
+</div>
+<table>
+<thead><tr>
+  <th>Cut</th><th>Price</th><th>vs Raw</th><th>vs Transmute</th><th>Qty AH</th>
+</tr></thead><tbody>
+<tr>
+  <td>Sovereign Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Shifting Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Tenuous Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Glowing Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Purified Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Royal Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Mysterious Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Balanced Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Infused Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Regal Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Defender's Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Puissant Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Guardian's Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+</tbody></table>
+</div>
+<div class="faction-panel"><h3>🔵 Alliance</h3>
+<div class="transmute-info">
+  <div class="row"><span class="label">Raw Dreadstone</span><span class="value gold-val">No data</span></div>
+  <div class="row"><span class="label">Transmute Cost</span><span class="value">No data</span></div>
+  <div class="row"><span class="label">Transmute Margin</span><span class="value neutral">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Twilight Opal</span><span class="value">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Eternal Shadow</span><span class="value">N/A</span></div>
+</div>
+<table>
+<thead><tr>
+  <th>Cut</th><th>Price</th><th>vs Raw</th><th>vs Transmute</th><th>Qty AH</th>
+</tr></thead><tbody>
+<tr>
+  <td>Sovereign Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Shifting Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Tenuous Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Glowing Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Purified Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Royal Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Mysterious Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Balanced Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Infused Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Regal Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Defender's Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Puissant Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Guardian's Dreadstone</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+<div class="gem-section">
+<div class="gem-header"><h2>🟠 ORANGE &nbsp; Ametrine</h2></div>
+<div class="gem-body">
+<div class="faction-grid">
+<div class="faction-panel"><h3>🔴 Horde</h3>
+<div class="transmute-info">
+  <div class="row"><span class="label">Raw Ametrine</span><span class="value gold-val">No data</span></div>
+  <div class="row"><span class="label">Transmute Cost</span><span class="value">No data</span></div>
+  <div class="row"><span class="label">Transmute Margin</span><span class="value neutral">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Monarch Topaz</span><span class="value">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Eternal Shadow</span><span class="value">N/A</span></div>
+</div>
+<table>
+<thead><tr>
+  <th>Cut</th><th>Price</th><th>vs Raw</th><th>vs Transmute</th><th>Qty AH</th>
+</tr></thead><tbody>
+<tr>
+  <td>Inscribed Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Etched Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Champion's Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Resplendent Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Fierce Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Deadly Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Glinting Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Lucent Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Deft Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Luminous Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Potent Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Veiled Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Durable Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Reckless Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Wicked Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Pristine Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Empowered Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Stark Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Stalwart Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Glimmering Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Accurate Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Resolute Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+</tbody></table>
+</div>
+<div class="faction-panel"><h3>🔵 Alliance</h3>
+<div class="transmute-info">
+  <div class="row"><span class="label">Raw Ametrine</span><span class="value gold-val">No data</span></div>
+  <div class="row"><span class="label">Transmute Cost</span><span class="value">No data</span></div>
+  <div class="row"><span class="label">Transmute Margin</span><span class="value neutral">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Monarch Topaz</span><span class="value">N/A</span></div>
+  <div class="row"><span class="label">↳ 1x Eternal Shadow</span><span class="value">N/A</span></div>
+</div>
+<table>
+<thead><tr>
+  <th>Cut</th><th>Price</th><th>vs Raw</th><th>vs Transmute</th><th>Qty AH</th>
+</tr></thead><tbody>
+<tr>
+  <td>Inscribed Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Etched Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Champion's Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Resplendent Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Fierce Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Deadly Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Glinting Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Lucent Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Deft Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Luminous Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Potent Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Veiled Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Durable Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Reckless Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Wicked Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Pristine Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Empowered Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Stark Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Stalwart Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Glimmering Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Accurate Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Resolute Ametrine</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+<div class="gem-section">
+<div class="gem-header"><h2>🟢 GREEN &nbsp; Eye of Zul</h2></div>
+<div class="gem-body">
+<div class="faction-grid">
+<div class="faction-panel"><h3>🔴 Horde</h3>
+<div class="transmute-info">
+  <div class="row"><span class="label">Raw Eye of Zul</span><span class="value gold-val">No data</span></div>
+  <div class="row"><span class="label">Transmute Cost</span><span class="value">No data</span></div>
+  <div class="row"><span class="label">Transmute Margin</span><span class="value neutral">N/A</span></div>
+  <div class="row"><span class="label">↳ 3x Forest Emerald</span><span class="value">N/A</span></div>
+</div>
+<table>
+<thead><tr>
+  <th>Cut</th><th>Price</th><th>vs Raw</th><th>vs Transmute</th><th>Qty AH</th>
+</tr></thead><tbody>
+<tr>
+  <td>Timeless Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Jagged Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Vivid Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Enduring Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Steady Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Forceful Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Seer's Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Misty Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Shining Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Turbid Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Intricate Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Dazzling Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Sundered Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Lambent Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Opaque Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Energized Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Radiant Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Tense Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Shattered Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+</tbody></table>
+</div>
+<div class="faction-panel"><h3>🔵 Alliance</h3>
+<div class="transmute-info">
+  <div class="row"><span class="label">Raw Eye of Zul</span><span class="value gold-val">No data</span></div>
+  <div class="row"><span class="label">Transmute Cost</span><span class="value">No data</span></div>
+  <div class="row"><span class="label">Transmute Margin</span><span class="value neutral">N/A</span></div>
+  <div class="row"><span class="label">↳ 3x Forest Emerald</span><span class="value">N/A</span></div>
+</div>
+<table>
+<thead><tr>
+  <th>Cut</th><th>Price</th><th>vs Raw</th><th>vs Transmute</th><th>Qty AH</th>
+</tr></thead><tbody>
+<tr>
+  <td>Timeless Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Jagged Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Vivid Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Enduring Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Steady Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Forceful Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Seer's Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Misty Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Shining Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Turbid Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Intricate Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Dazzling Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Sundered Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Lambent Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Opaque Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Energized Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Radiant Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Tense Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+<tr>
+  <td>Shattered Eye of Zul</td>
+  <td class="gold-val">No data</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">N/A</td>
+  <td class="neutral">—</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+</div></body></html>
